@@ -5,4 +5,5 @@
 ?>
 
 <h1>Professional WordPress Developer</h1>
+<h2>Hello World!</h2>
 <img src="<?php echo PLUGIN_DIR_URL.'/assets/img/professional-wp.jpg'; ?>" alt="Professional WordPress Developer">

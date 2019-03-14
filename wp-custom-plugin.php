@@ -15,6 +15,7 @@ Text Domain: custom-plugin
 
 define("PLUGIN_DIR_PATH", plugin_dir_path( __FILE__ ));
 define("PLUGIN_DIR_URL", plugin_dir_url( __FILE__ ));
+define("PLUGIN_VERSION", "1.0");
 
 function add_my_custom_menu(){
   add_menu_page(
@@ -60,6 +61,24 @@ function all_pages_function(){
   include_once PLUGIN_DIR_PATH."/views/all_pages.php";
 }
 
+function custom_plugin_assets(){
+  wp_enqueue_style( 
+    "style-handle", // $handle:string
+    PLUGIN_DIR_URL."assets/css/style.css", // $src:string
+    "", // $deps:array
+    PLUGIN_VERSION // $ver:string|boolean|null, $media:string 
+  );
+
+  wp_enqueue_script( 
+    "script-handle", 
+    PLUGIN_DIR_URL."assets/js/script.js",
+    "", // $deps:array, 
+    PLUGIN_VERSION, // $ver:string|boolean|null,
+    true // true or false; $in_footer:boolean 
+  );
+}
+add_action("init", "custom_plugin_assets");
+
 /*
 #4
 HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
@@ -77,13 +96,22 @@ HOW TO CREATE VIEWS OF EACH PAGE
 4. include PLUGIN_DIR_PATH."views/add_new.php"; in the page function
   -types: include, include_once, require, require_once
 
+  plugins_url() - src js,css,images
+  plugin_dir_path() - include php files
+  wp_enqueue_style - attach css files
+  wp_enqueue_script - attach js files
 
-#6 INCLUDE JS, CSS, IMAGES TO PLUGIN, 
+#6 INCLUDE JS, CSS, IMAGES TO PLUGIN
 -use PLUGIN_DIR_URL
   <?php echo PLUGIN_DIR_URL.'/assets/img/image.jpg'; ?>
 
 
-#7 WP_ENQUEUE
+#7 WP_ENQUEUE JS,CSS,IMAGES
+  wp_enqueue_style()
+  wp_enqueue_script()
+  add_action("init", "custom_plugin_assets");
+
+  
 
 
 */
