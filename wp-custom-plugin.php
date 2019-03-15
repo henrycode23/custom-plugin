@@ -79,6 +79,29 @@ function custom_plugin_assets(){
 }
 add_action("init", "custom_plugin_assets");
 
+// Table Generating Code
+function custom_plugin_tables(){
+  global $wpdb;
+
+  require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+
+  if(count($wpdb->get_var('SHOW TABLES LIKE "wp_custom_plugin"')) == 0){
+    $sql_create_table = 'CREATE TABLE `wp_custom_plugin` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(255) DEFAULT NULL,
+      `email` varchar(255) DEFAULT NULL,
+      `phone` varchar(255) DEFAULT NULL,
+      `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (`id`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=latin1';
+     
+    dbDelta( $sql_create_table );
+  }
+}
+register_activation_hook( __FILE__, 'custom_plugin_tables' );
+
+
+
 /*
 #4
 HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
@@ -111,7 +134,8 @@ HOW TO CREATE VIEWS OF EACH PAGE
   wp_enqueue_script()
   add_action("init", "custom_plugin_assets");
 
-  
+#8 AUTO GENERATE TABLES UPON ACTIVATION
+
 
 
 */
