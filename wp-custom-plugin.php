@@ -107,6 +107,18 @@ function deactivate_table(){
 }
 register_deactivation_hook( __FILE__, 'deactivate_table' );
 
+function create_page(){
+  $page = array();
+  $page['post_title'] = 'Custom Plugin Online Web Tutor';
+  $page['post_content'] = 'Learning Platform for WordPress Customization for Themes, Plugin and Widgets';
+  $page['post_status'] = 'publish';
+  $page['post_slug'] = 'custom-plugin-online';
+  $page['post_type'] = 'page';
+
+  wp_insert_post($page);
+}
+register_activation_hook( __FILE__, "create_page" );
+
 /*
 #4
 HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
@@ -152,7 +164,13 @@ HOW TO CREATE VIEWS OF EACH PAGE
   register_deactivation_hook( __FILE__, 'callable' );
   register_uninstall_hook( __FILE__, 'callable' );
   
-
+#10 CREATE PAGE UPON PLUGIN ACTIVATION
+  page title = page slug
+  wp_posts database table
+  explore wp_posts table columns
+  $page = array();
+  $page['column_name'] = '';
+  wp_insert_post($page)
 
 
 
