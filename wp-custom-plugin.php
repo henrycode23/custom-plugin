@@ -100,7 +100,12 @@ function custom_plugin_tables(){
 }
 register_activation_hook( __FILE__, 'custom_plugin_tables' );
 
+function deactivate_table(){
+  global $wpdb;
+  $wpdb->query('DROP table IF EXISTS wp_custom_plugin');
 
+}
+register_deactivation_hook( __FILE__, 'deactivate_table' );
 
 /*
 #4
@@ -135,6 +140,19 @@ HOW TO CREATE VIEWS OF EACH PAGE
   add_action("init", "custom_plugin_assets");
 
 #8 AUTO GENERATE TABLES UPON ACTIVATION
+  function callable()
+  global $wpdb
+  require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+  if(count($wpdb->get_var('SHOW TABLES LIKE "wp_custom_plugin"')) == 0){
+  dbDelta( $sql_create_table );
+  register_activation_hook( __FILE__, 'callable' );
+
+#9 UNINSTALL TABLE UPON PLUGIN DEACTIVATION
+  $wpdb->query('DROP table IF EXISTS wp_custom_plugin');
+  register_deactivation_hook( __FILE__, 'callable' );
+  register_uninstall_hook( __FILE__, 'callable' );
+  
+
 
 
 
