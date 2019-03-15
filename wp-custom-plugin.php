@@ -104,6 +104,11 @@ function deactivate_table(){
   global $wpdb;
   $wpdb->query('DROP table IF EXISTS wp_custom_plugin');
 
+  $the_post_id = get_option( "custom_plugin_page_id" );
+  if(!empty($the_post_id)){
+    wp_delete_post( $the_post_id, true ); // wp_posts > ID = delete
+  }
+
 }
 register_deactivation_hook( __FILE__, 'deactivate_table' );
 
@@ -115,7 +120,9 @@ function create_page(){
   $page['post_slug'] = 'custom-plugin-online';
   $page['post_type'] = 'page';
 
-  wp_insert_post($page);
+  $post_id = wp_insert_post($page); // wp_posts > ID
+
+  add_option( 'custom_plugin_page_id', $post_id ); // wp_options > option_value = $post_id, option_name = custom_plugin_page_id
 }
 register_activation_hook( __FILE__, "create_page" );
 
@@ -171,6 +178,17 @@ HOW TO CREATE VIEWS OF EACH PAGE
   $page = array();
   $page['column_name'] = '';
   wp_insert_post($page)
+
+#11 DELETE PAGES UPON PLUGIN DEACTIVATION/UNINSTALL
+  wp_options database table
+  explore wp_options table columns
+  contain the wp_insert_post() into a variable named $post_id
+  make the post_id with its name using add_action("name-inserted-to-wp_options", $post_id); 
+  make the post_id with name, inside the wp_options database table as reference 
+  add_option() - add to wp_options database table
+  get_option() - retrievs an option_value based on option_name
+  wp_insert_post()
+  wp_delete_post() - trash a post or page
 
 
 
