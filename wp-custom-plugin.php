@@ -62,7 +62,7 @@ function all_pages_function(){
 }
 
 function custom_plugin_assets(){
-  wp_enqueue_style( 
+  wp_enqueue_style(
     "style-handle", // $handle:string
     PLUGIN_DIR_URL."assets/css/style.css", // $src:string
     "", // $deps:array
@@ -76,8 +76,28 @@ function custom_plugin_assets(){
     PLUGIN_VERSION, // $ver:string|boolean|null,
     true // true or false; $in_footer:boolean 
   );
+
+  $object_array = array(
+    "Name"    => "Sadang Developer",
+    "Author"  => "Jack Henry Sadang",
+    "ajaxurl" => admin_url("admin-ajax")
+  );
+
+  wp_localize_script( "script-handle", "online_web_tutor", $object_array );
 }
 add_action("init", "custom_plugin_assets");
+
+
+function myjscode(){
+  ?>
+  <script type="text/javascript">
+    // alert("Hello Online Web Tutor");
+    var online_web_tutor = {"admin_url":"<?php echo admin_url('admin-ajax.php'); ?>"};
+  </script>
+  <?php
+}
+add_action("wp_head","myjscode");
+
 
 // Table Generating Code
 function custom_plugin_tables(){
@@ -190,6 +210,10 @@ HOW TO CREATE VIEWS OF EACH PAGE
   wp_insert_post()
   wp_delete_post() - trash a post or page
 
-
+#12 WP_LOCALIZE_SCRIPT
+  wp_localize_script( string $handle, string $object_name, array $l10n );
+  $handle - is attached to the PLUGIN_URL with the same $handle
+  admin_url() // return the admin-ajax.php  - used to handles ajax request wp-admin/admin-ajax.php
+  add_action("wp_head","callable_function");
 
 */
