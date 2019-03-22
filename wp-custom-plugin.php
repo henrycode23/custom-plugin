@@ -77,26 +77,13 @@ function custom_plugin_assets(){
     true // true or false; $in_footer:boolean 
   );
 
-  $object_array = array(
-    "Name"    => "Sadang Developer",
-    "Author"  => "Jack Henry Sadang",
-    "ajaxurl" => admin_url("admin-ajax")
-  );
-
-  wp_localize_script( "script-handle", "online_web_tutor", $object_array );
+  wp_localize_script( "script-handle", "ajaxurl", admin_url("admin-ajax.php") );
 }
 add_action("init", "custom_plugin_assets");
 
 
-function myjscode(){
-  ?>
-  <script type="text/javascript">
-    // alert("Hello Online Web Tutor");
-    var online_web_tutor = {"admin_url":"<?php echo admin_url('admin-ajax.php'); ?>"};
-  </script>
-  <?php
-}
-add_action("wp_head","myjscode");
+
+
 
 
 // Table Generating Code
@@ -215,5 +202,28 @@ HOW TO CREATE VIEWS OF EACH PAGE
   $handle - is attached to the PLUGIN_URL with the same $handle
   admin_url() // return the admin-ajax.php  - used to handles ajax request wp-admin/admin-ajax.php
   add_action("wp_head","callable_function");
+
+  $object_array = array(
+    "Name"    => "Sadang Developer",
+    "Author"  => "Jack Henry Sadang",
+    "ajaxurl" => admin_url("admin-ajax")
+  );
+
+  wp_localize_script( "script-handle", "online_web_tutor", $object_array );
+
+  ---
+
+  function myjscode(){
+  ?>
+    <script type="text/javascript">
+      // alert("Hello Online Web Tutor");
+      var online_web_tutor = {"admin_url":"<?php echo admin_url('admin-ajax.php'); ?>"};
+    </script>
+  <?php
+  }
+  add_action("wp_head","myjscode");
+
+#13 SIMPLE AJAX REQUEST IN WORDPRESS
+
 
 */
