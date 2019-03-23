@@ -81,6 +81,18 @@ function custom_plugin_assets(){
 }
 add_action("init", "custom_plugin_assets");
 
+if(isset($_REQUEST['action'])){
+  switch($_REQUEST['action']){
+    case "custom_plugin_library" : 
+      add_action("admin_init", "add_custom_plugin_library");
+      function add_custom_plugin_library(){
+        global $wpdb;
+        include_once PLUGIN_DIR_PATH."/library/custom-plugin-lib.php";
+      }
+      break;
+  }
+}
+
 
 
 
@@ -224,6 +236,7 @@ HOW TO CREATE VIEWS OF EACH PAGE
   add_action("wp_head","myjscode");
 
 #13 SIMPLE AJAX REQUEST IN WORDPRESS
-
+  wp_localize_script( "script-handle", "ajaxurl", admin_url("admin-ajax.php") );
+  post() - wordpress post method
 
 */
