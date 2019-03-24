@@ -96,3 +96,7 @@ HOW TO CREATE VIEWS OF EACH PAGE
   3. Check request at plugin file
   4. Attach Library file
   5. Handler AJAX Request and send response to User
+
+#14 POST FORM DATA WITH FORM VALIDATION
+  bootstrap form - add-new.php
+  jquery.validation.min.js

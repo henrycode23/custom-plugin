@@ -81,6 +81,8 @@ function custom_plugin_assets(){
 }
 add_action("init", "custom_plugin_assets");
 
+
+
 if(isset($_REQUEST['action'])){
   switch($_REQUEST['action']){
     case "custom_plugin_library" : 
@@ -92,9 +94,6 @@ if(isset($_REQUEST['action'])){
       break;
   }
 }
-
-
-
 
 
 
@@ -146,97 +145,6 @@ function create_page(){
 register_activation_hook( __FILE__, "create_page" );
 
 /*
-#4
-HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
--$menu_slug must be the same
 
-
-#5 INCLUDE FILES TO PLUGIN
-HOW TO CREATE VIEWS OF EACH PAGE
-1. create "views" folder
-2. create e.g. "add_new.php" file & write views scripts
-3. create define constants PLUGIN_DIR_PATH, PLUGIN_URL
-  define("PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
-  define("PLUGIN_URL", plugins_url());
-  -echo it to see
-4. include PLUGIN_DIR_PATH."views/add_new.php"; in the page function
-  -types: include, include_once, require, require_once
-
-  plugins_url() - src js,css,images
-  plugin_dir_path() - include php files
-  wp_enqueue_style - attach css files
-  wp_enqueue_script - attach js files
-
-#6 INCLUDE JS, CSS, IMAGES TO PLUGIN
--use PLUGIN_DIR_URL
-  <?php echo PLUGIN_DIR_URL.'/assets/img/image.jpg'; ?>
-
-
-#7 WP_ENQUEUE JS,CSS,IMAGES
-  wp_enqueue_style()
-  wp_enqueue_script()
-  add_action("init", "custom_plugin_assets");
-
-#8 AUTO GENERATE TABLES UPON ACTIVATION
-  function callable()
-  global $wpdb
-  require_once(ABSPATH.'wp-admin/includes/upgrade.php');
-  if(count($wpdb->get_var('SHOW TABLES LIKE "wp_custom_plugin"')) == 0){
-  dbDelta( $sql_create_table );
-  register_activation_hook( __FILE__, 'callable' );
-
-#9 UNINSTALL TABLE UPON PLUGIN DEACTIVATION
-  $wpdb->query('DROP table IF EXISTS wp_custom_plugin');
-  register_deactivation_hook( __FILE__, 'callable' );
-  register_uninstall_hook( __FILE__, 'callable' );
-  
-#10 CREATE PAGE UPON PLUGIN ACTIVATION
-  page title = page slug
-  wp_posts database table
-  explore wp_posts table columns
-  $page = array();
-  $page['column_name'] = '';
-  wp_insert_post($page)
-
-#11 DELETE PAGES UPON PLUGIN DEACTIVATION/UNINSTALL
-  wp_options database table
-  explore wp_options table columns
-  contain the wp_insert_post() into a variable named $post_id
-  make the post_id with its name using add_action("name-inserted-to-wp_options", $post_id); 
-  make the post_id with name, inside the wp_options database table as reference 
-  add_option() - add to wp_options database table
-  get_option() - retrievs an option_value based on option_name
-  wp_insert_post()
-  wp_delete_post() - trash a post or page
-
-#12 WP_LOCALIZE_SCRIPT
-  wp_localize_script( string $handle, string $object_name, array $l10n );
-  $handle - is attached to the PLUGIN_URL with the same $handle
-  admin_url() // return the admin-ajax.php  - used to handles ajax request wp-admin/admin-ajax.php
-  add_action("wp_head","callable_function");
-
-  $object_array = array(
-    "Name"    => "Sadang Developer",
-    "Author"  => "Jack Henry Sadang",
-    "ajaxurl" => admin_url("admin-ajax")
-  );
-
-  wp_localize_script( "script-handle", "online_web_tutor", $object_array );
-
-  ---
-
-  function myjscode(){
-  ?>
-    <script type="text/javascript">
-      // alert("Hello Online Web Tutor");
-      var online_web_tutor = {"admin_url":"<?php echo admin_url('admin-ajax.php'); ?>"};
-    </script>
-  <?php
-  }
-  add_action("wp_head","myjscode");
-
-#13 SIMPLE AJAX REQUEST IN WORDPRESS
-  wp_localize_script( "script-handle", "ajaxurl", admin_url("admin-ajax.php") );
-  post() - wordpress post method
 
 */
