@@ -18,6 +18,19 @@
   </style>
 </head>
 <body>
+
+<?php
+  global $wpdb;
+  // pull some data from wp_posts table
+  $db_results = $wpdb->get_results(
+    $wpdb->prepare(
+      "SELECT * FROM wp_posts ORDER BY ID LIMIT 5", ''
+    )
+  );
+
+  echo "<pre>"; print_r($db_results); echo "</pre>";
+?>
+
   <div class="container">
     <form action="" id="frmPost">
       <div class="form-group">
