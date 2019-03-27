@@ -85,11 +85,11 @@ add_action("init", "custom_plugin_assets");
 
 if(isset($_REQUEST['action'])){
   switch($_REQUEST['action']){
-    case "custom_plugin_library" : 
-      add_action("admin_init", "add_custom_plugin_library");
+    case 'custom_plugin_library' :
+      add_action( 'admin_init', 'add_custom_plugin_library' );
       function add_custom_plugin_library(){
         global $wpdb;
-        include_once PLUGIN_DIR_PATH."/library/custom-plugin-lib.php";
+        include_once PLUGIN_DIR_PATH. 'library/custom-plugin-lib.php';
       }
       break;
   }
@@ -118,6 +118,8 @@ function custom_plugin_tables(){
 }
 register_activation_hook( __FILE__, 'custom_plugin_tables' );
 
+
+
 function deactivate_table(){
   global $wpdb;
   $wpdb->query('DROP table IF EXISTS wp_custom_plugin');
@@ -129,6 +131,8 @@ function deactivate_table(){
 
 }
 register_deactivation_hook( __FILE__, 'deactivate_table' );
+
+
 
 function create_page(){
   $page = array();

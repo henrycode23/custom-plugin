@@ -1,7 +1,15 @@
-#4
-HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
--$menu_slug must be the same
+#1 WORDPRESS PLUGIN INTRODUCTION
 
+#2 COMMENT / PLUGIN INFORMATION
+  /**
+  * Plugin Name: Software Engineer
+  * Plugin URI: jackhenrysadang_software_engineer.com
+  */
+
+#3 ADD_MENU_PAGE()
+
+#4 HOW TO CREATE A DEFAULT/COMBINED SUBMENU/MENU PAGE
+-$menu_slug must be the same
 
 #5 INCLUDE FILES TO PLUGIN
 HOW TO CREATE VIEWS OF EACH PAGE
@@ -100,3 +108,7 @@ HOW TO CREATE VIEWS OF EACH PAGE
 #14 POST FORM DATA WITH FORM VALIDATION
   bootstrap form - add-new.php
   jquery.validation.min.js
+
+#15 $wpdb OBJECT
+  $wpdb->get_results() - gets all the data in the db.
+  $wpdb->prepare - for SQL security.
