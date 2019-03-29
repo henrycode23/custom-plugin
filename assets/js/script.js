@@ -2,6 +2,14 @@
 
 jQuery(function(){
 
+  // other ajax request
+  jQuery("#frmPostOtherPage").on("click", function(e){
+    e.preventDefault();
+    jQuery.post(ajaxurl, {action:"custom_plugin", name:"Online Web Tutor", Tut:"WordPress Plugin Development"}, function(response){
+      console.log(response);
+    });
+  });
+
   jQuery(document).on("click", ".btnClick", function(){
     
     var post_data = "action=custom_plugin_library&param=get_message";
