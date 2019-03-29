@@ -21,14 +21,25 @@
 
 <?php
   global $wpdb;
-  // pull some data from wp_posts table
-  $db_results = $wpdb->get_results(
-    $wpdb->prepare(
-      "SELECT * FROM wp_posts ORDER BY ID LIMIT 5", ''
-    )
-  );
+  // insert data into wp_custom_plugin db table on page refresh
+  // $wpdb->insert(
+  //   "wp_custom_plugin",
+  //   array(
+  //     "name"    => "Jack Henry Sadang",
+  //     "email"   => "jackhenrysadang22@gmail.com",
+  //     "phone"   => "09275245851"
+  //   )
+  // );
 
-  echo "<pre>"; print_r($db_results); echo "</pre>";
+  // $wpdb->query("INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('Jack Henry Sadang', 'jackhenrysadang22@gmail.com', '09275245851')");
+
+  $wpdb->query(
+    $wpdb->prepare(
+      "INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('%s', '%s', '%s')",
+      "Jack Henry Sadang", "jackhenrysadang22@gmail.com", "092342523"
+    )
+  )
+
 ?>
 
   <div class="container">
