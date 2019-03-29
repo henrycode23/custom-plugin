@@ -112,3 +112,17 @@ HOW TO CREATE VIEWS OF EACH PAGE
 #15 $wpdb OBJECT
   $wpdb->get_results() - gets all the data in the db.
   $wpdb->prepare - for SQL security.
+
+#16 INSERT DATA TO WORDPRESS DATABASE
+  2 Ways to Insert Values
+  1. $wpdb->insert();, wpdb::insert()
+    - $wpdb->insert("table_name", array("col"=>"val1","col2"=>"val2"));
+  2. $wpdb->query();, wpdb::prepare()
+      $wpdb->query( 
+        $wpdb->prepare(
+          "SQL QUERY with placeholders", val1, val2, value...
+        ) 
+      );
+    varchar type: %s
+    integer type: %d
+
