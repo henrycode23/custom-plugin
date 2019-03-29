@@ -21,24 +21,37 @@
 
 <?php
   global $wpdb;
-  // insert data into wp_custom_plugin db table on page refresh
-  // $wpdb->insert(
+  
+  // simple update when page is refreshed
+  $wpdb->query(
+    $wpdb->prepare(
+      "DELETE FROM wp_custom_plugin WHERE id = %d ", 3
+    )
+  );
+
+  // $wpdb->delete(
   //   "wp_custom_plugin",
   //   array(
-  //     "name"    => "Jack Henry Sadang",
-  //     "email"   => "jackhenrysadang22@gmail.com",
-  //     "phone"   => "09275245851"
+  //     "id" => 6
   //   )
   // );
 
-  // $wpdb->query("INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('Jack Henry Sadang', 'jackhenrysadang22@gmail.com', '09275245851')");
+  // $wpdb->query(
+  //   $wpdb->prepare(
+  //     "UPDATE wp_custom_plugin SET email = '%s' WHERE id = %d ",
+  //     'jackhenrysadang22@gmail.com', 6
+  //   )
+  // );
 
-  $wpdb->query(
-    $wpdb->prepare(
-      "INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('%s', '%s', '%s')",
-      "Jack Henry Sadang", "jackhenrysadang22@gmail.com", "092342523"
-    )
-  )
+  // $wpdb->update(
+  //   "wp_custom_plugin",
+  //   array(
+  //     "email" => "jackhenrysadang22@gmail.com"
+  //   ),
+  //   array(
+  //     "id"  => 4
+  //   )
+  // );
 
 ?>
 

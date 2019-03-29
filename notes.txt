@@ -126,3 +126,23 @@ HOW TO CREATE VIEWS OF EACH PAGE
     varchar type: %s
     integer type: %d
 
+#17 UPDATE, DELETE DB
+  wpdb::update()
+  1. $wpdb->update(
+      "table_name",
+      array(
+        "update_email" => "email_update"
+      ),
+      array(
+        "id" => 4
+      )
+    );
+  2. $wpdb->query(
+      $wpdb->prepare(
+        "",''
+      )
+    );
+
+---
+
+
