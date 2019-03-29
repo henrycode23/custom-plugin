@@ -96,6 +96,12 @@ if(isset($_REQUEST['action'])){
 }
 
 
+add_action( 'wp_ajax_custom_plugin', 'prefix_ajax_custom_plugin');
+function prefix_ajax_custom_plugin(){
+  print_r($_REQUEST);
+  wp_die();
+}
+
 
 // Table Generating Code
 function custom_plugin_tables(){
