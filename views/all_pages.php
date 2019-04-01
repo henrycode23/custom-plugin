@@ -24,7 +24,7 @@
 <body>
 
 <?php
-
+  echo do_shortcode("[custom-plugin]");
 ?>
 
   <div class="container">
