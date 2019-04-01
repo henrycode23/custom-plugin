@@ -2,13 +2,21 @@
 
 jQuery(function(){
 
-  // other ajax request
-  jQuery("#frmPostOtherPage").on("click", function(e){
-    e.preventDefault();
-    jQuery.post(ajaxurl, {action:"custom_plugin", name:"Online Web Tutor", Tut:"WordPress Plugin Development"}, function(response){
-      console.log(response);
-    });
+  jQuery('#frmPostOtherPage').validate({
+    submitHandler:function(){
+      var post_data = jQuery('#frmPostOtherPage').serialize()+'&action=custom_ajax_request';
+      jQuery.post(
+        ajaxurl,
+        post_data,
+        function(response){
+          var data = jQuery.parseJSON(response);
+          console.log('Name: '+data.txtName+'\n'+'Email: '+data.txtEmail);
+        }
+      )
+    }
   });
+
+  
 
   jQuery(document).on("click", ".btnClick", function(){
     
@@ -33,3 +41,20 @@ jQuery(function(){
   });
 
 });
+
+
+
+// other ajax request
+  // jQuery('#frmPostOtherPage').validate({
+  //   submitHandler:function(){
+  //     var post_data = jQuery('#frmPostOtherPage').serialize()+'&action=custom_ajax_req';
+  //     jQuery.post(
+  //       ajaxurl,
+  //       post_data,
+  //       function(response){
+  //         var data = jQuery.parseJSON(response);
+  //         console.log('Name: '+data.txtName+'\n'+'Email: '+data.txtEmail);
+  //       }
+  //     )
+  //   }
+  // });

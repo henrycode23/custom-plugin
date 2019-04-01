@@ -83,6 +83,24 @@ add_action("init", "custom_plugin_assets");
 
 
 
+add_action( 'wp_ajax_custom_ajax_request', 'custom_ajax_request' );
+function custom_ajax_request(){
+  echo json_encode($_REQUEST);
+  wp_die();
+}
+
+
+
+
+// custom_ajax_req from js file
+// add_action( 'wp_ajax_custom_ajax_req', 'custom_ajax_req_fn' );
+// function custom_ajax_req_fn(){
+//   echo json_encode($_REQUEST);
+//   wp_die();
+// }
+
+
+
 if(isset($_REQUEST['action'])){
   switch($_REQUEST['action']){
     case 'custom_plugin_library' :

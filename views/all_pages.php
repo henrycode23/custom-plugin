@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 
   <style>
-    #frmPost label.error{
+    #frmPostOtherPage label.error{
       color: red;
     }
   </style>
@@ -37,12 +37,7 @@
         <label for="txtEmail">Email for other page:</label>
         <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Enter Email" required>
       </div>
-      <div class="form-group form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox"> Remember me
-        </label>
-      </div>
-      <button type="button" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </body>
