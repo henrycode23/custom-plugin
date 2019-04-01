@@ -172,7 +172,34 @@ function create_page(){
 }
 register_activation_hook( __FILE__, "create_page" );
 
-/*
 
-
-*/
+function custom_plugin_func(){
+  include_once PLUGIN_DIR_PATH. '/views/shortcode_template.php';
+}
+add_shortcode( 'custom-plugin', 'custom_plugin_func' );
+// Simplest example of a shortcode tag using the API: [footag foo="bar"]
+function footag_func( $atts ){
+  return "foo = {$atts['foo']}";
+}
+add_shortcode( 'footag', 'footag_func' );
+// Example with nice attribute defaults: [bartag foo="bar"]
+function bartag_func( $atts ){
+  $atts = shortcode_atts( array(
+    'foo' => 'no foo',
+    'baz' => 'default baz'
+  ), $atts, 'bartag' );
+  return "foo = {$atts['foo']}";
+}
+add_shortcode( 'bartag', 'bartag_func' );
+// Example with enclosed content: [baztag]content[/baztag]
+// function baztag_func( $atts, $content = "" ){
+//   return "content = $content";
+// }
+// add_shortcode( 'baztag', 'baztag_func' );
+// If your plugin is designed as a class, write as follows:
+class MyPlugin {
+  public static function baztag_func( $atts, $content = "" ){
+    return "content = $content";
+  }
+}
+add_shortcode( 'baztag', array( 'MyPlugin', 'baztag_func' ) );
