@@ -177,6 +177,37 @@ function custom_plugin_func(){
   include_once PLUGIN_DIR_PATH. '/views/shortcode_template.php';
 }
 add_shortcode( 'custom-plugin', 'custom_plugin_func' );
+
+function customPluginWithParams($params){
+  $values = shortcode_atts( 
+    array(
+      "name"    => "Profotech",
+      "author"  => "Sanjay Kumar"
+    ), 
+    $params,
+    'custom-plugin-parameter'
+  );
+
+  echo "Name : ".$values['name']." and Author : ".$values['author'];
+}
+add_shortcode("custom-plugin-parameter", "customPluginWithParams");
+//  [custom-plugin-parameter name='Online Web Tutor' author='Sanjay Kumar']
+
+add_shortcode('tag-based', 'custom_plugin_tag_based');
+function custom_plugin_tag_based($params,$content,$tag){
+  if($tag=="tag-based"){
+    echo "<h1>".$content."</h1>";
+  }
+
+  if($tag=="called_me_down"){
+    echo "This is another advance format of wp shortcode";
+  }
+}
+add_shortcode("called_me_down", "custom_plugin_tag_based");
+// [tag-based] Online web tutor has provided some clear points about wordpress [/tag-based]
+
+
+// Learned From WordPress Codex
 // Simplest example of a shortcode tag using the API: [footag foo="bar"]
 function footag_func( $atts ){
   return "foo = {$atts['foo']}";
