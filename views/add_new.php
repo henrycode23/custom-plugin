@@ -55,6 +55,8 @@
 
 ?>
 
+<?php wp_enqueue_media(); ?>
+
   <div class="container">
     <form action="" id="frmPost">
       <div class="form-group">
@@ -65,10 +67,10 @@
         <label for="txtEmail">Email:</label>
         <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Enter Email" required>
       </div>
-      <div class="form-group form-check">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox"> Remember me
-        </label>
+      <div class="form-group">
+        <label for="btnImage">Upload Image:</label>
+        <input type="button" class="form-control" id="btnImage" name="btnImage" value="Upload Image">
+        <img src="" id="getImage" style="height:100px; width:100px;">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
