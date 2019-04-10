@@ -12,66 +12,46 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
 
   <style>
+    .container {
+      max-width: 98%;
+    }
     #frmPost label.error{
       color: red;
     }
   </style>
+
+  <?php
+
+  global $wpdb;
+
+    $data = $wpdb->get_row( 
+            $wpdb->prepare( "SELECT * FROM wp_custom_plugin ORDER BY id DESC LIMIT 1", OBJECT )
+    );
+
+    // to check the expected variable
+    // print_r($data);
+
+  ?>
+
 </head>
 <body>
-
-<?php
-  global $wpdb;
-  
-  // simple update when page is refreshed
-  $wpdb->query(
-    $wpdb->prepare(
-      "DELETE FROM wp_custom_plugin WHERE id = %d ", 3
-    )
-  );
-
-  // $wpdb->delete(
-  //   "wp_custom_plugin",
-  //   array(
-  //     "id" => 6
-  //   )
-  // );
-
-  // $wpdb->query(
-  //   $wpdb->prepare(
-  //     "UPDATE wp_custom_plugin SET email = '%s' WHERE id = %d ",
-  //     'jackhenrysadang22@gmail.com', 6
-  //   )
-  // );
-
-  // $wpdb->update(
-  //   "wp_custom_plugin",
-  //   array(
-  //     "email" => "jackhenrysadang22@gmail.com"
-  //   ),
-  //   array(
-  //     "id"  => 4
-  //   )
-  // );
-
-?>
-
-<?php wp_enqueue_media(); ?>
 
   <div class="container">
     <form action="" id="frmPost">
       <div class="form-group">
         <label for="txtName">Name:</label>
-        <input type="text" class="form-control" id="txtName" name="txtName" placeholder="Enter Name" required>
+        <input type="text" class="form-control" id="txtName" value="<?php echo $data->name ?>" name="txtName" placeholder="Enter Name" required>
       </div>
       <div class="form-group">
         <label for="txtEmail">Email:</label>
-        <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Enter Email" required>
+        <input type="email" class="form-control" id="txtEmail" value="<?php echo $data->email ?>" name="txtEmail" placeholder="Enter Email" required>
       </div>
       <div class="form-group">
-        <label for="btnImage">Upload Image:</label>
-        <input type="button" class="form-control" id="btnImage" name="btnImage" value="Upload Image">
-        <img src="" id="getImage" style="height:100px; width:100px;">
+        <label for="txtDesc">Add Description:</label>
+        <?php // wp_editor( '', 'description_id' ); ?>
+        <?php wp_editor( html_entity_decode($data->description), 'description_id' ); ?>
       </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

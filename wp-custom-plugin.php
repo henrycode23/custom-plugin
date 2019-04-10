@@ -132,7 +132,7 @@ function custom_plugin_tables(){
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `name` varchar(255) DEFAULT NULL,
       `email` varchar(255) DEFAULT NULL,
-      `phone` varchar(255) DEFAULT NULL,
+      `description` text DEFAULT NULL,
       `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
       PRIMARY KEY (`id`)
      ) ENGINE=InnoDB DEFAULT CHARSET=latin1';
